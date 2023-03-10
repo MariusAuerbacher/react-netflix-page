@@ -8,15 +8,15 @@ class MovieGallery extends React.Component {
     isLoading: true,
     error: null,
   };
-
+  //https://www.omdbapi.com/?apikey=2beaba4d&s=${this.props.category}
   async getMovies() {
     try {
       let res = await fetch(
-        `https://www.omdbapi.com/?apikey=2beaba4d&s=${this.props.category}`
+        `${process.env.REACT_APP_BE_URL}/medias`
       ); /*2beaba4d&s */
       let data = await res.json();
       console.log(data);
-      this.setState({ movies: data.Search });
+      this.setState({ movies: data });
       this.setState({ isLoading: false });
       if (data.Error) {
         this.setState({ error: "something went wrong" });
@@ -34,25 +34,17 @@ class MovieGallery extends React.Component {
     return (
       <>
         <div className="root">
-          <h2>{this.props.category}</h2>
           {this.state.isLoading ? <p>loading</p> : null}
           {this.state.error ? <p>{this.state.error}</p> : null}
           <div>
             {this.state.movies
               ? this.state.movies.map((movie) => {
                   return (
-                      <Jumbotron>
-                      <Container>
-                        <Row>
-                          <img
-                            key={movie.imdbID}
-                            src={movie.Poster}
-                            alt={movie.Title}
-                          />
-                        </Row>
-                      </Container>
-                      </Jumbotron>
-         
+                    <img
+                      key={movie.imdbID}
+                      src={movie.poster}
+                      alt={movie.title}
+                    />
                   );
                 })
               : null}

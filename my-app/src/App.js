@@ -11,8 +11,8 @@ function App() {
     <>
      <NetflixNavbar/>
      <MovieGallery category={"Harry Potter"}/>
-     <MovieGallery category={"Lord Of The Rings"}/>
-     <MovieGallery category={"Star Wars"}/>
+     {/*<MovieGallery category={"Lord Of The Rings"}/>
+     <MovieGallery category={"Star Wars"}/>*/}
      <Footer/>
     </>
   );
